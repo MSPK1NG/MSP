@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MSP — My Scam Protection</title>
+<style>
+:root{--navy:#101C2C;--teal:#176B65;--gold:#E8D6AF;--ivory:#F5F6F8;--bg:#F5F6F8;--card:#fff;--ink:#101C2C;--mut:#5A6676;--line:#DDE1E8;--ok:#1E7B4B;--warn:#B7791F;--bad:#B3342E;--accent:#176B65;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1420;--card:#142235;--ink:#EEF1F5;--mut:#9AA7B8;--line:#26364B;--accent:#5BC2B8;--ok:#4CC38A;--warn:#E3B04B;--bad:#F07A72}}
+:root[data-theme="dark"]{--bg:#0B1420;--card:#142235;--ink:#EEF1F5;--mut:#9AA7B8;--line:#26364B;--accent:#5BC2B8;--ok:#4CC38A;--warn:#E3B04B;--bad:#F07A72}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;margin:0 0 .4em;letter-spacing:-.01em}h1{font-size:1.9rem}h2{font-size:1.25rem}h3{font-size:1.05rem}
+a{color:var(--accent)}p{margin:.3em 0 .8em}.mut{color:var(--mut)}.sm{font-size:.85rem}
+.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+nav{background:var(--navy);color:#cfd6e0;padding:20px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{color:var(--gold);font:700 1.3rem Georgia,serif;padding:0 8px}.brand small{display:block;font:.7rem system-ui;color:#8fa0b5;letter-spacing:.04em;margin-top:2px}
+nav a{display:flex;gap:10px;align-items:center;color:#cfd6e0;text-decoration:none;padding:9px 10px;border-radius:8px;margin-top:2px}
+nav a:hover{background:#1b2c42}nav a.on{background:#1b2c42;color:var(--gold);box-shadow:inset 3px 0 0 var(--gold)}
+nav .sec{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#6f8097;margin:18px 10px 4px}
+nav a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+main{padding:28px clamp(16px,4vw,44px);max-width:1100px;width:100%}
+svg.i{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.btn{display:inline-flex;gap:8px;align-items:center;background:var(--teal);color:#fff;border:0;border-radius:8px;padding:10px 16px;font:600 .92rem inherit;cursor:pointer;text-decoration:none;transition:filter .15s}
+.btn:hover{filter:brightness(1.12)}.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn.gold{background:var(--gold);color:var(--navy)}.btn.del{background:transparent;color:var(--bad);border:1px solid var(--bad)}
+label{display:block;font-weight:600;margin:14px 0 4px;font-size:.9rem}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+textarea{min-height:140px;resize:vertical}.err{color:var(--bad);font-size:.85rem;margin-top:4px}
+.chip{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.75rem;font-weight:700;border:1px solid currentColor;white-space:nowrap}
+.s-Supported,.k-observed{color:var(--ok)}.s-Contradicted{color:var(--bad)}.s-Unverified,.k-missing,.k-inconclusive{color:var(--warn)}.k-warning{color:var(--bad)}
+.demo{background:var(--gold);color:var(--navy);border-color:var(--navy)}
+.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);margin:16px 0}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;color:var(--mut);font:600 .9rem inherit;cursor:pointer;white-space:nowrap}
+.tabs button.on{color:var(--ink);border-color:var(--teal)}
+details.cl{border:1px solid var(--line);border-radius:10px;margin-bottom:10px;background:var(--card)}
+details.cl summary{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 14px;cursor:pointer;list-style:none;flex-wrap:wrap}
+details.cl .bd{padding:0 14px 14px;border-top:1px solid var(--line)}
+.bd h3{margin-top:12px;font:700 .75rem system-ui;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.bd ul{margin:.2em 0;padding-left:1.1em}
+.verdict{border-left:5px solid var(--warn);background:var(--card);border-radius:10px;padding:16px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.verdict.v1{border-left-color:var(--bad)}.verdict.v3{border-left-color:var(--warn)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row.sp{justify-content:space-between}
+.empty{text-align:center;padding:34px 16px;color:var(--mut);border:1px dashed var(--line);border-radius:12px}
+.tl{border-left:2px solid var(--line);margin-left:6px;padding-left:16px}.tl div{margin-bottom:12px;position:relative}.tl div:before{content:"";position:absolute;left:-23px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--teal)}
+table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem}
+.tag{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gold);background:var(--navy);padding:2px 8px;border-radius:4px}
+@media(max-width:820px){.app{display:block}nav{position:sticky;height:auto;z-index:5;display:flex;gap:4px;overflow-x:auto;padding:10px;align-items:center}
+nav .brand{padding:0 8px 0 0}nav .brand small,nav .sec{display:none}nav a{white-space:nowrap;box-shadow:none!important}main{padding-top:18px}}
+.app.pub{display:block}.app.pub nav{display:none}.app.pub main{max-width:none;padding:0}
+.w{background:radial-gradient(ellipse at 70% 0,#183349 0,#101C2C 55%) #101C2C;color:#F5F6F8;min-height:100vh;--bad:#B3342E}
+.w .in{max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,48px)}
+.w .top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;gap:12px}
+.w .wm{font:700 1.5rem Georgia,serif;color:#E8D6AF;letter-spacing:.04em;text-decoration:none}
+.w .desc{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#9fb0c4}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:48px 0 64px}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.7rem);line-height:1.08;color:#F5F6F8}.hero h1 em{color:#E8D6AF}
+.hero .sub{font:1.2rem Georgia,serif;color:#E8D6AF;margin:.6em 0}.hero p{color:#c3cdda;max-width:34em}
+.btn.ghost{background:transparent;color:#F5F6F8;border:1px solid #4a6178}
+.w .ben{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.w .bc{border:1px solid #28425c;border-radius:12px;padding:22px;background:rgba(255,255,255,.03)}
+.w .bc h3{color:#E8D6AF}.w .bc p{color:#c3cdda;margin:0}
+.w .note{border-left:3px solid #176B65;padding:10px 16px;color:#c3cdda;margin:40px 0}
+.w .ib{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));color:#c3cdda}.w .ib h3{color:#E8D6AF}
+.w footer{border-top:1px solid #28425c;margin-top:40px;padding:22px 0 34px;display:flex;gap:20px;flex-wrap:wrap;color:#9fb0c4}
+.w footer button{background:none;border:0;color:#cfd6e0;cursor:pointer;font:inherit;padding:0;text-decoration:underline}
+.w a:focus-visible,.w button:focus-visible,.w input:focus-visible{outline:2px solid #E8D6AF;outline-offset:2px}
+@keyframes dr{to{stroke-dashoffset:0}}@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.trail path{stroke-dasharray:420;stroke-dashoffset:420;animation:dr 2.6s ease .3s forwards}.hero>div{animation:fi .9s ease both}
+@media(prefers-reduced-motion:reduce){.trail path{animation:none;stroke-dashoffset:0}.hero>div{animation:none}}
+.au{max-width:440px;margin:0 auto;padding:16px 0 60px}
+.ac{--card:#fff;--ink:#101C2C;--line:#DDE1E8;--mut:#5A6676;--accent:#176B65;--bad:#B3342E;--bg:#F5F6F8;background:#F5F6F8;color:#101C2C;border-radius:14px;padding:26px}
+.seg{display:flex;border:1px solid #DDE1E8;border-radius:8px;overflow:hidden}.seg button{flex:1;padding:9px;background:none;border:0;cursor:pointer;font:600 .9rem inherit;color:#5A6676}.seg button.on{background:#101C2C;color:#E8D6AF}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding-top:20px}.hero svg{max-width:280px;margin:0 auto}}
+@media print{nav,.noprint,.tabs{display:none!important}.app{display:block}body{background:#fff;color:#000}.card{break-inside:avoid}}
+</style></head><body>
+<div class="app"><nav id="nav" aria-label="Primary"></nav><main id="main" tabindex="-1"></main></div>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const P={plus:'M12 5v14M5 12h14',home:'M3 11l9-8 9 8v10H3z',search:'M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-5-5',map:'M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v14M15 6v14',link:'M10 14a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 10a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1',mask:'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z',scale:'M12 3v18M5 7h14M5 7l-3 7a4 4 0 006 0zM19 7l-3 7a4 4 0 006 0z',file:'M6 3h9l4 4v14H6zM14 3v5h5',folder:'M3 6h6l2 2h10v11H3z',help:'M9 9a3 3 0 115 2c-1 1-2 1-2 3M12 18h.01',cog:'M12 9a3 3 0 100 6 3 3 0 000-6zM19 12l2-1-2-4-2 1-2-1-1-2h-4l-1 2-2 1-2-1-2 4 2 1v2l-2 1 2 4 2-1 2 1 1 2h4l1-2 2-1 2 1 2-4-2-1z',road:'M4 20L8 4M20 20L16 4M12 6v3M12 12v3M12 18v2'};
+const ic=n=>`<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="${P[n]}"/></svg>`;
+/* ---------- storage (browser only) ---------- */
+let mem=[],pers=true;
+const load=()=>{try{return JSON.parse(localStorage.getItem('msp.cases')||'[]')}catch(e){pers=false;return mem}};
+const save=c=>{mem=c;try{localStorage.setItem('msp.cases',JSON.stringify(c))}catch(e){pers=false}};
+const fmt=t=>new Date(t).toLocaleString([], {dateStyle:'medium',timeStyle:'short'});
+const TYPES={job:'Job / internship',shop:'Shopping / seller',site:'Website / link',msg:'Message / email',claim:'General claim'};
+/* ---------- investigation engine: intake -> SmartRouter -> local checks -> TruthMap -> verdict ---------- */
+const FREE=['gmail.com','yahoo.com','outlook.com','hotmail.com','proton.me','protonmail.com','rediffmail.com'];
+const SHORT=['bit.ly','tinyurl.com','t.co','goo.gl','cutt.ly','rb.gy','is.gd'];
+const PAY=/(gift ?card|crypto|bitcoin|usdt|western union|wire transfer|upi|registration fee|processing fee|security deposit|training fee|advance payment|pay (first|before)|refundable)/gi;
+const URG=/(urgent|act now|immediately|within 24 hours|last chance|limited slots|today only|final notice)/gi;
+function classify(t){const s=t.toLowerCase();if(/(intern|job|hiring|salary|stipend|offer letter|recruit|vacancy)/.test(s))return'job';if(/(seller|order|discount|price|cart|delivery|% off|product)/.test(s))return'shop';if(/^\s*(https?:\/\/|www\.)\S+\s*$/.test(t))return'site';if(/(dear|subject:|@|click|verify your|account)/.test(s))return'msg';return'claim'}
+function analyse(f){
+ const t=f.input,now=Date.now(),type=f.type==='auto'?classify(t):f.type;
+ const urls=[...new Set((t.match(/(https?:\/\/|www\.)[^\s)>\]"']+/gi)||[]))];
+ const hosts=urls.map(u=>{try{return new URL(/^https?:/i.test(u)?u:'https://'+u).hostname.replace(/^www\./,'').toLowerCase()}catch(e){return null}}).filter(Boolean);
+ const emails=[...new Set(t.match(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g)||[])];
+ const checks=[],add=(name,kind,detail)=>checks.push({name,kind,detail});
+ const org=(f.org||'').trim(),otok=org.toLowerCase().replace(/[^a-z0-9 ]/g,'').split(/\s+/).filter(w=>w.length>2&&!['ltd','pvt','inc','llc','the','and','corp'].includes(w));
+ hosts.forEach(h=>{
+  if(SHORT.includes(h))add('Shortened link: '+h,'warning','The destination is hidden behind a link shortener, so the real site cannot be judged from the text alone.');
+  if(h.includes('xn--'))add('Punycode domain: '+h,'warning','Internationalised domain names can imitate familiar spellings. Inspect the decoded name carefully.');
+  if(/^\d+(\.\d+){3}$/.test(h))add('IP address as host: '+h,'warning','Legitimate organisations rarely ask people to visit a raw IP address.');
+  if((h.match(/-/g)||[]).length>=3)add('Many hyphens in domain: '+h,'warning','Long hyphenated names are common in look-alike domains, but also in some legitimate sites.');
+  if(otok.length){const hit=otok.some(w=>h.replace(/[-.]/g,'').includes(w));
+   add('Claimed organisation vs domain: '+h,hit?'observed':'warning',hit?`The domain contains part of “${org}”. This is only a naming match and does not prove the site is operated by that organisation.`:`The domain does not contain any part of the claimed organisation “${org}”. This can have innocent explanations (parent brands, regional domains).`)}
+ });
+ urls.filter(u=>/^http:\/\//i.test(u)).forEach(u=>add('Unencrypted link (http)','warning','Link does not use HTTPS: '+u));
+ hosts.length&&!hosts.some(h=>SHORT.includes(h))&&add('Link scheme and format','observed',`${hosts.length} link(s) found in the input; domain(s): ${hosts.join(', ')}.`);
+ emails.forEach(e=>{const d=e.split('@')[1].toLowerCase();
+  if(org&&FREE.includes(d))add('Free email provider: '+e,'warning',`Contact uses ${d} while the sender claims to represent “${org}”. Many small organisations do this, so treat it as a prompt to verify, not proof.`);
+  else if(otok.length&&!otok.some(w=>d.replace(/[-.]/g,'').includes(w)))add('Email domain differs from organisation: '+e,'warning',`The email domain ${d} does not resemble the claimed organisation.`);
+  else add('Email address present: '+e,'observed','Listed for later cross-checking against official contact pages.')});
+ const pay=[...new Set((t.match(PAY)||[]).map(x=>x.toLowerCase()))];
+ pay.length&&add('Payment demand wording','warning','The text mentions: '+pay.join(', ')+'. Requests for upfront payment or hard-to-reverse payment methods are a common pattern in scams, but not proof by themselves.');
+ const urg=[...new Set((t.match(URG)||[]).map(x=>x.toLowerCase()))];
+ urg.length&&add('Pressure / urgency wording','warning','The text uses: '+urg.join(', ')+'.');
+ if(!org&&(type==='job'||type==='shop'))add('Organisation or seller not provided','missing','Add the organisation or seller name in the intake form so domains and emails can be compared with it.');
+ if(!urls.length&&!emails.length)add('No links or email addresses found','inconclusive','The input contains nothing checkable by domain. Findings rely on wording only.');
+ ['Source research (TinyFish)','Domain registration (RDAP)','Google Safe Browsing','Published fact-checks','Independent AI analysis (DualLens)'].forEach(n=>add(n,'missing','Not performed. This integration is not connected in this version.'));
+ const parts=t.split(/(?<=[.!?])\s+|\n+/).map(s=>s.trim()).filter(s=>s.split(/\s+/).length>=4&&!/^(https?:\/\/|www\.)\S+$/i.test(s)).slice(0,6);
+ const claims=parts.map((s,i)=>({id:'c'+i,text:s,status:'Unverified',support:[],contra:[],sources:[],strength:'No external source has been checked for this claim. Absence of evidence is not evidence that the claim is false.',questions:['Does an official, independently reachable page confirm this?','Can the contact details be matched with a source you found yourself (not via this message)?']}));
+ hosts.forEach((h,i)=>claims.push({id:'h'+i,text:`The link belongs to ${org||'the claimed organisation'} (${h})`,status:'Unverified',support:[],contra:[],sources:[],strength:'Only the text of the link was examined. A domain existing, or containing a brand name, does not make it trustworthy.',questions:['Who registered this domain, and when?','Does the official organisation site link to this address?']}));
+ const warn=checks.filter(c=>c.kind==='warning').length;
+ return{id:'k'+now.toString(36),title:f.title||(hosts[0]||t.slice(0,48)),type,input:t,context:f.ctx,org,created:now,updated:now,demo:false,claims,checks,sources:[],
+  verdict:warn?1:3,note:warn?`${warn} warning sign(s) found in the submitted text and links. These come from local pattern checks only; no external source was consulted.`:'No external research was performed, so no conclusion about safety can be drawn.'}}
+const VERD={1:'Suspicious indicators found',2:'No major red flags found in checked sources',3:'Insufficient evidence'};
+function sample(){const n=Date.now();return{id:'demo'+n.toString(36),title:'Sample: internship offer (illustrative)',type:'job',demo:true,created:n,updated:n,org:'Example Corp',context:'',
+ input:'Congratulations! You are selected for a paid internship at Example Corp. Stipend 25,000 per month. Pay a refundable registration fee today only. Contact hr.examplecorp@gmail.com',
+ claims:[
+ {id:'a',text:'Example Corp offers a paid internship with a 25,000 monthly stipend',status:'Unverified',support:[],contra:[],sources:[],strength:'Illustrative: no listing was found among the sample sources, which is inconclusive on its own.',questions:['Is the role listed on the organisation’s own careers page?']},
+ {id:'b',text:'The email hr.examplecorp@gmail.com is Example Corp’s HR contact',status:'Contradicted',support:[],contra:['Illustrative: the sample organisation’s official contact page lists only an @example.test address.'],sources:['s1'],strength:'Illustrative: one official page conflicts with the claim. Its content should still be re-checked by hand.',questions:['Has the organisation confirmed the sender through its official channel?']},
+ {id:'c',text:'Example Corp is a registered organisation',status:'Supported',support:['Illustrative: a sample public record lists the organisation name.'],contra:[],sources:['s2'],strength:'Illustrative: the record confirms the name exists only; it says nothing about this offer.',questions:['Does the record’s address match the offer letter?']}],
+ checks:[{name:'Free email provider: hr.examplecorp@gmail.com',kind:'warning',detail:'Contact uses gmail.com while the sender claims to represent “Example Corp”.'},{name:'Payment demand wording',kind:'warning',detail:'The text mentions: registration fee, refundable.'},{name:'Domain registration (RDAP)',kind:'missing',detail:'Not performed in this sample.'}],
+ sources:[{id:'s1',title:'Example Corp — Contact (illustrative)',url:'https://example.test/contact',cat:'Official websites and organization pages',excerpt:'Illustrative placeholder text.',status:'Illustrative — not retrieved'},{id:'s2',title:'Public record (illustrative)',url:'https://records.example.test/example-corp',cat:'Public registration or domain information',excerpt:'Illustrative placeholder text.',status:'Illustrative — not retrieved'}],
+ verdict:1,note:'Illustrative sample only. Nothing in this case was retrieved or verified.'}}
+/* ---------- views ---------- */
+const NAV=[['#/','home','Overview'],['#/verify','search','VerifyNow'],['#/vault','folder','MyVault'],['sec','Modules'],['#/modules','map','TruthMap · SourceTrace'],['#/assist','help','MSP Assist'],['#/settings','cog','Settings'],['#/roadmap','road','Roadmap'],['#/exit','mask','Exit demo access']];
+function nav(h){$('#nav').innerHTML=`<div class="brand">MSP<small>My Scam Protection</small></div>`+NAV.map(n=>n[0]==='sec'?`<div class="sec">${n[1]}</div>`:`<a href="${n[0]}" class="${h===n[0]?'on':''}" ${h===n[0]?'aria-current="page"':''}>${ic(n[1])}${n[2]}</a>`).join('')}
+const chip=s=>`<span class="chip s-${s}">${s}</span>`;
+const kindLbl={observed:'Confirmed observation',warning:'Potential warning sign',missing:'Missing information',inconclusive:'Inconclusive'};
+let verifyType='auto',tab='truth';
+function overview(){const c=load().sort((a,b)=>b.updated-a.updated);
+ return `<div class="row sp"><div><h1>Overview</h1><p class="mut">Evidence before verdict. Every claim leaves a trail.</p></div><a class="btn" href="#/verify">${ic('plus')}New Investigation</a></div>
+ <div class="grid"><div class="card"><div class="mut sm">Cases saved in this browser</div><h1>${c.length}</h1></div><div class="card"><div class="mut sm">Cases with warning signs</div><h1>${c.filter(x=>x.verdict===1&&!x.demo).length}</h1></div><div class="card"><div class="mut sm">Live research runs</div><h1>0</h1><div class="sm mut">No research adapter is connected yet.</div></div></div>
+ <div class="card"><h2>Recent cases</h2>${c.length?c.slice(0,5).map(caseRow).join(''):`<div class="empty">${ic('folder')}<p><b>No investigations yet.</b></p><p>Start one from VerifyNow, or load a clearly labelled illustrative sample to explore the layout.</p><button class="btn alt" id="loadsample">Load illustrative sample</button></div>`}</div>
+ <div class="grid"><div class="card"><h2>Quick start</h2><div class="row">${Object.entries(TYPES).map(([k,v])=>`<a class="btn alt" href="#/verify" data-type="${k}">${v}</a>`).join('')}</div></div>
+ <div class="card"><h2>Activity</h2>${c.length?`<div class="tl">${c.slice(0,6).map(x=>`<div><b>${x.demo?'Sample loaded':'Case created'}:</b> ${esc(x.title)}<div class="mut sm" style="margin:0">${fmt(x.created)}</div></div>`).join('')}</div>`:'<p class="mut">Activity appears here once you create a case.</p>'}</div></div>
+ <div class="card"><h2>How MSP works</h2><p class="mut">Input → SmartRouter → Research adapters → Evidence engine → TruthMap → VerdictDesk. In this version, only local text and link checks run. External research is shown as “not performed”.</p></div>`}
+const caseRow=x=>`<a href="#/case/${x.id}" style="text-decoration:none;color:inherit;display:block;padding:10px 0;border-bottom:1px solid var(--line)"><div class="row sp"><b>${esc(x.title)}</b><span class="row">${x.demo?'<span class="chip demo">Illustrative sample</span>':''}<span class="chip">${TYPES[x.type]}</span></span></div><div class="sm mut">${VERD[x.verdict]} · updated ${fmt(x.updated)}</div></a>`;
+function verify(){const o=Object.entries({auto:'Detect automatically',...TYPES}).map(([k,v])=>`<option value="${k}" ${k===verifyType?'selected':''}>${v}</option>`).join('');
+ return `<h1>VerifyNow</h1><p class="mut">Submit something suspicious. MSP breaks it into claims and shows what has and has not been checked.</p>
+ <form class="card" id="vf" novalidate><label for="ty">Investigation type</label><select id="ty">${o}</select>
+ <label for="in">Link, offer, message or claim</label><textarea id="in" aria-describedby="e1" placeholder="Paste a URL, a job offer, a seller page, or a suspicious message"></textarea><div class="err" id="e1" role="alert"></div>
+ <label for="ti">Case title (optional)</label><input id="ti" maxlength="80">
+ <label for="og">Claimed organisation or seller (optional)</label><input id="og" maxlength="80" placeholder="Used to compare against domains and emails">
+ <label for="cx">Context (optional)</label><input id="cx" maxlength="200" placeholder="How did you receive this?">
+ <div class="card" style="margin:16px 0;background:var(--bg)"><b>Privacy notice</b><p class="sm mut" style="margin:.3em 0 0">In this version your input is analysed in your browser and saved only in this browser’s local storage. Nothing is sent anywhere. When external research is connected later, the text or links sent for checking will be listed here first.</p></div>
+ <button class="btn" type="submit">${ic('search')}Start Investigation</button></form>`}
+function caseView(id){const x=load().find(c=>c.id===id);if(!x)return `<div class="empty"><p>Case not found.</p><a class="btn" href="#/vault">Back to MyVault</a></div>`;
+ const T=[['truth','TruthMap'],['src','SourceTrace'],['imp','ImpersonationCheck'],['dual','DualLens'],['rep','VerdictDesk report']];
+ let b='';
+ if(tab==='truth')b=`<p class="sm mut">Supported = evidence supports the claim within the scope checked. Contradicted = credible evidence conflicts with it. Unverified = insufficient or inconclusive. A missing source is not proof a claim is false.</p>`+x.claims.map(cl=>`<details class="cl"><summary><span>${esc(cl.text)}</span>${chip(cl.status)}</summary><div class="bd"><h3>Supporting evidence</h3>${li(cl.support,'None found.')}<h3>Contradicting evidence</h3>${li(cl.contra,'None found.')}<h3>Sources</h3>${cl.sources.length?'<ul>'+cl.sources.map(s=>{const r=x.sources.find(q=>q.id===s);return r?`<li>${esc(r.title)} <span class="mut">(${esc(r.url)})</span></li>`:''}).join('')+'</ul>':'<p class="mut sm">No sources attached.</p>'}<h3>Evidence strength</h3><p>${esc(cl.strength)}</p><h3>Outstanding questions</h3>${li(cl.questions,'None.')}</div></details>`).join('');
+ if(tab==='src'){const cats=['Official websites and organization pages','Public registration or domain information','Independent reporting and published fact-checks','Other relevant public sources'];
+  b=`<div class="card"><b>Retrieval status:</b> <span class="chip s-Unverified">Unavailable</span><p class="sm mut">${x.demo?'These records are illustrative placeholders on reserved example domains. None were retrieved.':'No TinyFish run was made for this case. No sources have been collected.'}</p></div>`+cats.map(c=>{const s=x.sources.filter(q=>q.cat===c);return `<div class="card"><h3>${c}</h3>${s.length?`<table><tr><th>Source</th><th>Excerpt</th><th>Status</th></tr>${s.map(q=>`<tr><td><b>${esc(q.title)}</b><br><span class="mut sm">${esc(q.url)}</span></td><td>${esc(q.excerpt)}</td><td>${esc(q.status)}</td></tr>`).join('')}</table>`:'<p class="mut sm">No sources collected.</p>'}</div>`}).join('')}
+ if(tab==='imp')b=`<p class="sm mut">A warning sign is not proof of fraud. Results below come from local checks of the submitted text only.</p>`+x.checks.filter(c=>c.kind!=='missing'||/organisation|seller/.test(c.name)).map(chk).join('')+`<div class="card"><b>Not performed</b><p class="sm mut">Domain registration data and contact details across independent sources need external adapters.</p></div>`;
+ if(tab==='dual')b=`<div class="grid"><div class="card"><h3>OpenAI assessment</h3><span class="chip s-Unverified">Not configured</span><p class="sm mut">No API connection. No result is shown rather than an invented one.</p></div><div class="card"><h3>Gemini assessment</h3><span class="chip s-Unverified">Not configured</span><p class="sm mut">Same. When both are connected, they will appear side by side, kept separate from verified observations. Agreement will not be treated as proof.</p></div></div>`;
+ if(tab==='rep'){const cnt=s=>x.claims.filter(c=>c.status===s).length;
+  b=`<div class="card"><h2>Case overview</h2><p><b>${esc(x.title)}</b> · ${TYPES[x.type]} · created ${fmt(x.created)}</p><p class="sm mut">Scope: ${x.demo?'illustrative sample':'local analysis of the submitted text and links only'}.</p><h3>Submitted input</h3><p style="white-space:pre-wrap">${esc(x.input)}</p></div>
+  <div class="card"><h2>Summary of findings</h2><p><b>${VERD[x.verdict]}.</b> ${esc(x.note)}</p><p>Claims: ${cnt('Supported')} supported · ${cnt('Contradicted')} contradicted · ${cnt('Unverified')} unverified.</p></div>
+  <div class="card"><h2>Potential warning signs</h2>${li(x.checks.filter(c=>c.kind==='warning').map(c=>c.name+' — '+c.detail),'None detected by local checks.')}</div>
+  <div class="card"><h2>Unavailable checks</h2>${li(x.checks.filter(c=>c.kind==='missing').map(c=>c.name+' — '+c.detail),'None.')}</div>
+  <div class="card"><h2>Source trail</h2><p class="mut">${x.sources.length?x.sources.map(s=>esc(s.title)+' ('+esc(s.url)+') — '+esc(s.status)).join('<br>'):'No sources were retrieved.'}</p></div>
+  <div class="card"><h2>Recommended next steps</h2>${li(['Find the organisation’s official site yourself (search for it, do not use links from the message).','Compare the contact details with that official site.','Never pay upfront fees to secure a job, prize or refund.','Ask the organisation through an official channel whether it sent this.'],'')}</div>
+  <div class="card"><h2>Limitations</h2><p class="sm mut">This report does not guarantee that any website, offer, seller or claim is safe or fraudulent. Warning signs are prompts for further checking, not proof. Retrieved at: no external retrieval performed.</p></div>
+  <button class="btn noprint" onclick="print()">${ic('file')}Print / save as PDF</button>`}
+ return `<div class="row sp"><div><a href="#/vault" class="sm noprint">← MyVault</a><h1>${esc(x.title)}</h1><div class="row">${x.demo?'<span class="chip demo">Illustrative sample — not live verification</span>':''}<span class="chip">${TYPES[x.type]}</span><span class="sm mut">Updated ${fmt(x.updated)}</span></div></div></div>
+ <div class="verdict v${x.verdict}" style="margin-top:14px"><div class="sm mut">Overall outcome</div><h2 style="margin:0">${VERD[x.verdict]}</h2><div class="sm">${esc(x.note)}</div></div>
+ <div class="tabs" role="tablist">${T.map(t=>`<button role="tab" data-tab="${t[0]}" class="${tab===t[0]?'on':''}" aria-selected="${tab===t[0]}">${t[1]}</button>`).join('')}</div>${b}`}
+const li=(a,e)=>a.length?'<ul>'+a.map(s=>`<li>${esc(s)}</li>`).join('')+'</ul>':`<p class="mut sm">${e}</p>`;
+const chk=c=>`<div class="card"><div class="row sp"><b>${esc(c.name)}</b><span class="chip k-${c.kind}">${kindLbl[c.kind]}</span></div><p class="sm mut" style="margin:6px 0 0">${esc(c.detail)}</p></div>`;
+function vault(){const q=(vault.q||'').toLowerCase(),ft=vault.t||'all',c=load().sort((a,b)=>b.updated-a.updated).filter(x=>(ft==='all'||x.type===ft)&&(x.title+x.input).toLowerCase().includes(q));
+ return `<div class="row sp"><h1>MyVault</h1><a class="btn" href="#/verify">${ic('plus')}New Investigation</a></div>
+ <p class="sm mut">${pers?'Cases are stored only in this browser (local storage). Clearing browser data deletes them.':'Browser storage is unavailable here, so cases last only until you close this page.'}</p>
+ <div class="row card"><input id="vq" style="flex:2;min-width:180px" placeholder="Search cases" aria-label="Search cases" value="${esc(vault.q||'')}"><select id="vt" style="flex:1;min-width:150px" aria-label="Filter by type"><option value="all">All types</option>${Object.entries(TYPES).map(([k,v])=>`<option value="${k}" ${k===ft?'selected':''}>${v}</option>`).join('')}</select></div>
+ ${c.length?c.map(x=>`<div class="card"><div class="row sp"><div style="flex:1;min-width:200px">${caseRow(x).replace('border-bottom:1px solid var(--line)','')}</div><button class="btn del" data-del="${x.id}" aria-label="Delete ${esc(x.title)}">Delete</button></div></div>`).join(''):`<div class="empty"><p>${load().length?'No cases match your filters.':'No saved cases yet.'}</p></div>`}`}
+function settings(){const I=[['TinyFish source research','Adapter planned; no credentials, not tested'],['Google Safe Browsing','Not configured'],['RDAP domain data','Not configured'],['Google Fact Check Tools','Not configured'],['OpenAI API','Not configured'],['Gemini API','Not configured'],['Authentication (Supabase Auth or Firebase)','Not configured: demo access only']];
+ return `<h1>Settings and Transparency</h1><div class="card"><h2>Integrations</h2><table>${I.map(i=>`<tr><td>${i[0]}</td><td><span class="chip s-Unverified">${i[1]}</span></td></tr>`).join('')}</table><p class="sm mut">API keys must live on a server and are never entered or shown in this frontend.</p></div>
+ <div class="card"><h2>Appearance</h2><select id="th" aria-label="Theme" style="max-width:240px"><option value="auto">Match system</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
+ <div class="card"><h2>Data and privacy</h2><p>Cases are stored only in this browser. Nothing leaves your device in this version.</p><button class="btn del" id="clr">Delete all cases</button></div>
+ <div class="card"><h2>Methodology and limitations</h2><p class="sm">The current engine runs local pattern checks on submitted text: link format, claimed-organisation versus domain and email, payment and urgency wording. It does not browse the web. It assigns no trust score. Outcomes are limited to “Suspicious indicators found” or “Insufficient evidence” until real research adapters exist; “No major red flags found in checked sources” is reserved for cases where sources were actually checked.</p></div>
+ <div class="card"><h2>About</h2><p class="sm">MSP — My Scam Protection. Every Claim Leaves a Trail. A hackathon prototype; not a guarantee of safety.</p></div>`}
+function assist(){const F=[['How do I investigate a suspicious offer?','Find the organisation yourself, never via the message. Compare its official contact details, email domain and listed roles. Do not pay anything upfront.'],['How do I read TruthMap?','Each row is one claim. Supported, Contradicted and Unverified describe the evidence found so far. Unverified usually means “not yet checked”, not “false”.'],['What does the verdict mean?','It summarises the evidence gathered, cautiously. It is never a guarantee. “Insufficient evidence” means the checks done cannot decide either way.'],['What evidence is missing?','Open the report’s Unavailable checks list. Those are checks MSP did not perform.'],['What should I check next?','Open a claim in TruthMap and read its outstanding questions.']];
+ return `<h1>MSP Assist</h1><p class="mut">Guidance for using the workflow. There is no human support channel connected.</p>`+F.map(f=>`<details class="card"><summary><b>${f[0]}</b></summary><p style="margin-top:8px">${f[1]}</p></details>`).join('')}
+function roadmap(){const R=[['TrustGraph','Relationship view of organisations, domains, contacts and claims, drawn only from real data.'],['ProofLedger','Timestamped history of evidence and finding changes. No tamper-proof claims unless implemented.'],['AgentSwarm','Specialised research agents for domains, sources, impersonation and claims.'],['ChangeWatch','Scheduled rechecks that highlight source changes.'],['SmartFollow','Proposes the next useful checks from missing evidence.'],['SourceShield','Source provenance, freshness and conflict tracking, without a simplistic score.']];
+ return `<h1>Roadmap</h1><p class="mut">Planned only. None of these are working yet.</p><div class="grid">${R.map(r=>`<div class="card"><span class="tag">Coming later</span><h3 style="margin-top:8px">${r[0]}</h3><p class="sm mut">${r[1]}</p></div>`).join('')}</div>`}
+function modules(){return `<h1>Modules</h1><div class="grid">${[['VerifyNow','Intake. Working.'],['TruthMap','Claim and evidence matrix. Working on local analysis and illustrative samples.'],['SourceTrace','Source workspace. Interface ready; waiting for TinyFish adapter.'],['ImpersonationCheck','Local checks working; registration data pending RDAP.'],['DualLens','Interface ready; needs OpenAI and Gemini API access.'],['VerdictDesk','Printable report. Working.']].map(m=>`<div class="card"><h3>${m[0]}</h3><p class="sm mut">${m[1]}</p></div>`).join('')}</div><p class="sm mut">Open a case from MyVault to use these modules.</p>`}
+/* ---------- welcome, auth, demo session ---------- */
+let sessMem=false,authMode='in';
+const hasDemo=()=>{try{return sessionStorage.getItem('msp.demo')==='1'}catch(e){return sessMem}};
+const setDemo=v=>{sessMem=v;try{v?sessionStorage.setItem('msp.demo','1'):sessionStorage.removeItem('msp.demo')}catch(e){}};
+/* Auth adapter: replace start() with Supabase signInWithOtp (email or phone) or Firebase equivalents, called against your own project. No passwords or codes are ever kept in this file or in browser storage. */
+const AUTH={configured:false,async start(kind,id){if(!this.configured)throw new Error('not_configured')}};
+const kindOf=v=>{v=v.trim();if(!v)return null;if(v.includes('@'))return'email';return/^[+\d][\d\s\-()]*$/.test(v)?'phone':'bad'};
+function welcome(){return `<div class="w"><div class="in"><div class="top"><div><div class="wm">MSP — My Scam Protection</div><div class="desc">Digital Investigation &amp; Intelligence Platform</div></div><a class="btn ghost" href="#/auth">Sign in</a></div>
+<section class="hero"><div><h1>Every Claim <em>Leaves a Trail.</em></h1><p class="sub">Question what you see. Examine the evidence. Make informed decisions.</p><p>Investigate suspicious links, job offers, shopping deals, messages, and digital claims through an evidence-led investigation workspace.</p><div class="row" style="margin-top:22px"><a class="btn gold" href="#/auth">Begin Investigation</a><button class="btn ghost" data-go="how">Explore How It Works</button></div></div>
+<div><svg class="trail" viewBox="0 0 360 320" role="img" aria-label="A trail of connected points leading to a magnifying glass"><g fill="none" stroke-linecap="round"><path d="M24 292C84 256 58 196 132 176S226 168 232 112" stroke="#176B65" stroke-width="2"/><path d="M132 176C170 130 150 90 196 64" stroke="#3a5a70" stroke-width="1.5"/><circle cx="262" cy="88" r="42" stroke="#E8D6AF" stroke-width="2.5"/><path d="M292 118l36 36" stroke="#E8D6AF" stroke-width="5"/></g><g fill="#E8D6AF"><circle cx="24" cy="292" r="5"/><circle cx="132" cy="176" r="5"/><circle cx="196" cy="64" r="4" fill="#176B65"/><circle cx="232" cy="112" r="5"/></g></svg></div></section>
+<section id="how"><div class="ben"><div class="bc"><h3>Trace Sources</h3><p>Follow a claim back to where it came from, with links and retrieval times recorded.</p></div><div class="bc"><h3>Examine Claims</h3><p>Break an offer or message into individual claims and see what supports or contradicts each.</p></div><div class="bc"><h3>Understand Risk</h3><p>Read cautious findings that show what was checked, what was not, and why.</p></div></div>
+<div class="note">MSP supports informed decisions; no automated check can guarantee that an offer or website is safe.</div></section>
+<section class="ib"><div id="about"><h3>About</h3><p class="sm">MSP is a hackathon prototype for evidence-led investigation of suspicious digital activity.</p></div><div id="privacy"><h3>Privacy</h3><p class="sm">In this version, investigations run in your browser and are stored only in this browser. Nothing is uploaded.</p></div><div id="method"><h3>Methodology</h3><p class="sm">Current checks are local pattern checks on text and links. External source research is not yet connected, and is reported as not performed.</p></div></section>
+<footer><button data-go="about">About</button><button data-go="privacy">Privacy</button><button data-go="method">Methodology</button><span>Contact: not yet available</span></footer></div></div>`}
+function auth(){const up=authMode==='up';return `<div class="w"><div class="in"><div class="top"><a class="wm" href="#/welcome">MSP</a><a class="btn ghost" href="#/welcome">← Back to welcome</a></div><div class="au"><div class="ac">
+<div class="seg"><button data-am="in" class="${up?'':'on'}" aria-pressed="${!up}">Sign in</button><button data-am="up" class="${up?'on':''}" aria-pressed="${up}">Create account</button></div>
+<h1 style="margin-top:18px">${up?'Create your account':'Welcome back'}</h1><p class="mut sm">Enter your email address or mobile number to continue.</p>
+<form id="af" novalidate><label for="id">Email or mobile number</label><input id="id" autocomplete="username" aria-describedby="ah ae"><div class="sm mut" id="ah" style="margin-top:4px">We will use a magic link for email, or a one-time code for mobile.</div><div class="err" id="ae" role="alert"></div><button class="btn" id="ab" type="submit" style="margin-top:14px;width:100%;justify-content:center">Continue</button></form>
+<div id="as" role="status"></div>
+<div style="border-top:1px solid #DDE1E8;margin-top:22px;padding-top:18px"><span class="chip demo">DEMO ACCESS</span><p class="sm mut" style="margin-top:8px">Explore MSP without an account. No identity is verified and no one is signed in. Cases stay in this browser.</p><button class="btn gold" id="demo" style="width:100%;justify-content:center">Continue with demo access</button></div></div></div></div></div>`}
+/* ---------- router and events ---------- */
+function route(){const h=location.hash||'#/welcome',m=h.match(/^#\/case\/(.+)/),pub=h==='#/welcome'||h==='#/auth';
+ if(h==='#/exit'){setDemo(false);location.hash='#/welcome';return}
+ if(!pub&&!hasDemo()){location.hash='#/auth';return}
+ document.querySelector('.app').classList.toggle('pub',pub);nav(m?'#/vault':h);let v;
+ if(pub){$('#main').innerHTML=h==='#/auth'?auth():welcome();wire();return}
+ if(m)v=caseView(m[1]);else v={'#/':overview,'#/verify':verify,'#/vault':vault,'#/settings':settings,'#/assist':assist,'#/roadmap':roadmap,'#/modules':modules}[h]?.()||overview();
+ $('#main').innerHTML=v;wire();}
+function wire(){const m=$('#main');
+ m.querySelectorAll('[data-type]').forEach(e=>e.onclick=()=>verifyType=e.dataset.type);
+ const ls=$('#loadsample');if(ls)ls.onclick=()=>{const c=load();const s=sample();c.push(s);save(c);tab='truth';location.hash='#/case/'+s.id};
+ m.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;route()});
+ m.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{if(confirm('Delete this case?')){save(load().filter(x=>x.id!==b.dataset.del));route()}});
+ const vf=$('#vf');if(vf)vf.onsubmit=e=>{e.preventDefault();const t=$('#in').value.trim(),er=$('#e1');
+  if(t.length<10){er.textContent='Please enter at least 10 characters: a link, message or claim to investigate.';return}
+  if(t.length>5000){er.textContent='Input is too long (5,000 character limit).';return}
+  const c=analyse({input:t,type:$('#ty').value,title:$('#ti').value.trim(),org:$('#og').value,ctx:$('#cx').value.trim()});
+  const all=load();all.push(c);save(all);verifyType='auto';tab='truth';location.hash='#/case/'+c.id};
+ const vq=$('#vq');if(vq){vq.oninput=e=>{vault.q=e.target.value;const p=e.target.selectionStart;route();const n=$('#vq');n.focus();n.setSelectionRange(p,p)};$('#vt').onchange=e=>{vault.t=e.target.value;route()}}
+ const th=$('#th');if(th){th.value=document.documentElement.dataset.theme||'auto';th.onchange=e=>{e.target.value==='auto'?delete document.documentElement.dataset.theme:document.documentElement.dataset.theme=e.target.value}}
+ const cl=$('#clr');if(cl)cl.onclick=()=>{if(confirm('Delete all saved cases from this browser?')){save([]);route()}};
+ m.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{const e=document.getElementById(b.dataset.go);e&&e.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})});
+ m.querySelectorAll('[data-am]').forEach(b=>b.onclick=()=>{authMode=b.dataset.am;route()});
+ const dm=$('#demo');if(dm)dm.onclick=()=>{setDemo(true);location.hash='#/'};
+ const af=$('#af');if(af){const ip=$('#id');ip.oninput=()=>{const k=kindOf(ip.value);$('#ah').textContent=k==='email'?'Email detected: a magic link would be used once sign-in is connected.':k==='phone'?'Mobile detected: a one-time code would be used once sign-in is connected.':'We will use a magic link for email, or a one-time code for mobile.';$('#ae').textContent=''};
+  af.onsubmit=async e=>{e.preventDefault();const v=ip.value.trim(),k=kindOf(v),er=$('#ae'),as=$('#as'),b=$('#ab');as.innerHTML='';
+   if(!k){er.textContent='Enter an email address or mobile number.';return}
+   const dg=v.replace(/\D/g,'').length;
+   if(k==='bad'){er.textContent='Enter a valid email address (name@example.com) or a mobile number.';return}
+   if(k==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){er.textContent='That email address looks incomplete. Use the format name@example.com.';return}
+   if(k==='phone'&&(dg<8||dg>15)){er.textContent='Enter a mobile number with country code, for example +91 98765 43210.';return}
+   er.textContent='';b.disabled=true;b.textContent='Checking…';b.setAttribute('aria-busy','true');
+   try{await AUTH.start(k,v)}catch(x){as.innerHTML=x.message==='not_configured'?'<div style="background:#fff;border:1px solid #DDE1E8;border-radius:10px;padding:12px;margin-top:14px" class="sm"><b>Sign-in is not connected yet.</b><br>No email or code was sent, and this identifier was not verified or saved. Use demo access below to explore MSP.</div>':'<div class="err">Something went wrong. Please try again.</div>'}
+   b.disabled=false;b.textContent='Continue';b.removeAttribute('aria-busy')}}}
+addEventListener('hashchange',()=>{window.scrollTo(0,0);route()});route();
+</script></body></html>
